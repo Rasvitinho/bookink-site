@@ -3,72 +3,404 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bookink — Gestão para estúdios, clínicas e salões — teste 14 dias</title>
-<meta name="description" content="Agenda, pagamentos, comissões, estoque e avisos no celular. Teste grátis por 14 dias.">
+<title>Bookink — agenda e gestão para estúdios, clínicas e salões</title>
+<meta name="description" content="Agenda por profissional, sinal, comissão, estoque e avisos no celular. Teste o Bookink por 14 dias, sem cartão.">
+<meta name="theme-color" content="#17224D">
+<meta property="og:title" content="Bookink — agenda e gestão para quem atende com hora marcada">
+<meta property="og:description" content="Estúdios de tatuagem, consultórios e salões: agenda, pagamentos, comissões e avisos no celular. 14 dias grátis.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317224D'/%3E%3Cpath d='M16 6c4 5 7 8.6 7 12.4A7 7 0 0 1 9 18.4C9 14.600 12 11 16 6z' fill='%23FFD84D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f1115;--card:#181b22;--tx:#eef0f4;--mut:#9aa3b2;--ac:#ff5a1f;--ln:#262b36}
-@media (prefers-color-scheme:light){:root{--bg:#f6f7f9;--card:#fff;--tx:#14171c;--mut:#5a6372;--ln:#e3e6ec}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-.w{max-width:960px;margin:0 auto;padding:0 16px}
-header{padding:20px 0;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;font-size:18px}.logo b{color:var(--ac)}
-a.btn,button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:13px 22px;font:600 16px inherit;text-decoration:none;cursor:pointer;display:inline-block}
-a.btn.o{background:transparent;border:1px solid var(--ln);color:var(--tx)}
-.hero{padding:48px 0 32px}h1{font-size:clamp(30px,6vw,48px);line-height:1.1;margin:0 0 16px}
-.hero p{color:var(--mut);font-size:18px;max-width:620px}
-.seg{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}.seg span{border:1px solid var(--ln);border-radius:99px;padding:6px 14px;font-size:14px;color:var(--mut)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:24px 0}
-.c{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:20px}.c h3{margin:0 0 6px;font-size:17px}.c p{margin:0;color:var(--mut);font-size:15px}
-h2{font-size:28px;margin:44px 0 6px}
-form{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:22px;display:grid;gap:12px;max-width:520px}
-label{font-size:14px;color:var(--mut);display:grid;gap:4px}
-input,select{background:var(--bg);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:12px;font:inherit}
-small{color:var(--mut)}footer{padding:40px 0;color:var(--mut);font-size:13px}
+:root{
+  --paper:#F2F4F7; --white:#FFFFFF; --ink:#17224D; --ink2:#2D45C9; --mark:#FFD84D;
+  --txt:#1B2340; --mut:#4A5470; --line:#D5DAE4; --soft:#E7EBF3;
+  --d:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --b:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--txt);font:400 17px/1.6 var(--b);-webkit-font-smoothing:antialiased}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink2);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--d);margin:0;color:var(--ink);letter-spacing:-.02em}
+h1{font-weight:800;font-size:clamp(36px,6.4vw,64px);line-height:1.03}
+h2{font-weight:800;font-size:clamp(28px,4.2vw,40px);line-height:1.1}
+h3{font-weight:600;font-size:19px;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+.lead{font-size:clamp(18px,2.2vw,20px);color:var(--mut);max-width:34em}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink2);color:#fff;border:0;border-radius:12px;padding:15px 24px;font:700 17px/1 var(--b);text-decoration:none;cursor:pointer;min-height:52px;transition:background .15s}
+.btn:hover{background:#2238b0}
+.btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn.alt:hover{background:var(--ink);color:#fff}
+.btn.mk{background:var(--mark);color:var(--ink)}
+.btn.mk:hover{background:#ffe27a}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* topo */
+.top{position:sticky;top:0;z-index:20;background:rgba(242,244,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .w{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font:800 22px/1 var(--d);color:var(--ink);text-decoration:none;letter-spacing:-.03em}
+.logo svg{width:30px;height:30px}
+.top nav{display:flex;align-items:center;gap:26px}
+.top nav a:not(.btn){text-decoration:none;font-weight:500;color:var(--mut)}
+.top nav a:not(.btn):hover{color:var(--ink)}
+.top .btn{padding:11px 18px;min-height:44px;font-size:15px}
+@media(max-width:760px){.top nav a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:56px 0 72px}
+.hero .w{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{margin-bottom:20px}
+.hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero .nota{margin-top:16px;font-size:15px;color:var(--mut)}
+@media(max-width:900px){.hero{padding:36px 0 52px}.hero .w{grid-template-columns:1fr;gap:40px}}
+
+/* demo da agenda */
+.demo{background:var(--white);border:2px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.demo-h{padding:14px 18px 0;background:var(--soft);border-bottom:2px solid var(--ink)}
+.demo-h p{font:600 13px/1.2 var(--b);color:var(--mut);margin-bottom:10px}
+.tabs{display:flex;gap:4px}
+.tabs button{flex:1;appearance:none;border:2px solid transparent;border-bottom:0;background:transparent;color:var(--mut);font:600 14px/1.2 var(--b);padding:11px 6px;border-radius:10px 10px 0 0;cursor:pointer;min-height:44px}
+.tabs button[aria-selected=true]{background:var(--white);color:var(--ink);border-color:var(--ink);margin-bottom:-2px;padding-bottom:13px}
+.demo-b{padding:18px}
+.demo-t{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.demo-t strong{font:800 20px/1.1 var(--d);color:var(--ink)}
+.demo-t span{font-size:14px;color:var(--mut)}
+.slots{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.slot{display:grid;grid-template-columns:54px 1fr;align-items:center;gap:12px;min-height:60px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--white);position:relative}
+.slot time{font:700 15px/1 var(--b);color:var(--ink);font-variant-numeric:tabular-nums}
+.slot .who{font-weight:600;line-height:1.25}
+.slot .what{display:block;font-size:14px;color:var(--mut);font-weight:400}
+.slot.livre{border-style:dashed;border-color:#9AA5C2;background:transparent;cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit;appearance:none}
+.slot.livre:hover{background:var(--soft);border-color:var(--ink2)}
+.slot.livre .who{color:var(--ink2)}
+.slot.novo{background:var(--mark);border-color:var(--ink);border-style:solid}
+.slot.novo .what{color:var(--ink)}
+.stamp{position:absolute;right:10px;top:50%;margin-top:-17px;transform:rotate(-7deg);border:2px solid var(--ink);color:var(--ink);border-radius:8px;padding:5px 9px;font:800 13px/1 var(--d);letter-spacing:.02em;background:var(--mark);animation:carimbo .32s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes carimbo{from{opacity:0;transform:scale(1.9) rotate(-18deg)}to{opacity:1;transform:scale(1) rotate(-7deg)}}
+.demo-f{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+.demo-f b{color:var(--ink)}
+.demo-f button{appearance:none;background:none;border:0;padding:0;font:600 14px var(--b);color:var(--ink2);text-decoration:underline;cursor:pointer;min-height:24px}
+.vocab{margin-top:12px;font-size:14px;color:var(--mut)}
+.vocab b{color:var(--ink)}
+
+/* seções */
+section{padding:72px 0}
+.sec-h{max-width:36em;margin-bottom:36px}
+.sec-h p{margin-top:12px;color:var(--mut);font-size:18px}
+
+/* recursos: linhas com filetes */
+.rec{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rec .w{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+.rec .sec-h{position:sticky;top:96px;align-self:start}
+.linhas{list-style:none;margin:0;padding:0}
+.linhas li{display:grid;grid-template-columns:1fr;gap:4px;padding:20px 0;border-top:1px solid var(--line)}
+.linhas li:first-child{border-top:0;padding-top:0}
+.linhas p{color:var(--mut);max-width:34em}
+@media(max-width:900px){.rec .w{grid-template-columns:1fr;gap:28px}.rec .sec-h{position:static}}
+
+/* segmentos */
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);border-radius:20px;background:var(--white);overflow:hidden}
+.seg{padding:26px 26px 28px}
+.seg+.seg{border-left:2px solid var(--ink)}
+.seg h3{margin-bottom:14px}
+.seg dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.seg dt{color:var(--mut)}
+.seg dd{margin:0;font-weight:600;color:var(--ink)}
+.seg p{margin-top:16px;font-size:15px;color:var(--mut)}
+@media(max-width:900px){.segs{grid-template-columns:1fr}.seg+.seg{border-left:0;border-top:2px solid var(--ink)}}
+
+/* passos */
+.passos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:p}
+.passos li{counter-increment:p;border-top:3px solid var(--ink);padding-top:16px}
+.passos li::before{content:counter(p);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font:800 16px var(--d);margin-bottom:14px}
+.passos h3{margin-bottom:6px}
+.passos p{color:var(--mut);font-size:16px}
+@media(max-width:900px){.passos{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.passos{grid-template-columns:1fr}}
+
+/* valor */
+.valor{background:var(--ink);color:#fff}
+.valor .w{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.valor h2{color:#fff}
+.valor p{color:#C9D1EC;margin-top:14px;max-width:32em}
+.valor ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;color:#fff}
+.valor li{display:flex;gap:10px;align-items:flex-start}
+.valor li::before{content:"";flex:none;width:10px;height:10px;margin-top:9px;border-radius:50%;background:var(--mark)}
+.valor .btn{margin-top:26px}
+@media(max-width:900px){.valor .w{grid-template-columns:1fr;gap:28px}}
+
+/* faq */
+.faq{max-width:760px}
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font:600 18px/1.3 var(--b);color:var(--ink);min-height:56px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font:600 26px/1 var(--b);color:var(--ink2);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 22px;color:var(--mut);max-width:36em}
+
+/* pedido de teste */
+.teste{background:var(--white);border-top:1px solid var(--line)}
+.teste .w{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.teste .sec-h{margin-bottom:0}
+form{display:grid;gap:14px;background:var(--paper);border:2px solid var(--ink);border-radius:20px;padding:26px;box-shadow:8px 8px 0 var(--ink)}
+label{display:grid;gap:6px;font-weight:600;font-size:15px;color:var(--ink)}
+input,select{font:400 17px var(--b);color:var(--txt);background:var(--white);border:1.5px solid #9AA5C2;border-radius:10px;padding:13px 14px;min-height:50px;width:100%}
+input:focus,select:focus{outline:3px solid var(--ink2);outline-offset:1px;border-color:var(--ink2)}
+form small{color:var(--mut);font-size:13.5px;line-height:1.5}
+form .btn{justify-content:center;width:100%}
+@media(max-width:900px){.teste .w{grid-template-columns:1fr;gap:32px}}
+
+footer{padding:36px 0 44px;color:var(--mut);font-size:15px}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="w">
-<header><div class="logo">Book<b>ink</b></div><a class="btn o" href="#teste">Testar 14 dias</a></header>
 
-<section class="hero">
-<h1>Sua agenda, pagamentos e equipe em um só lugar — no celular.</h1>
-<p>Sistema de gestão feito para quem atende com hora marcada. Teste por 14 dias, sem cartão de crédito.</p>
-<div class="seg"><span>Estúdios de tatuagem e piercing</span><span>Consultórios e clínicas</span><span>Salões, barbearias e estética</span></div>
-<a class="btn" href="#teste">Quero testar por 14 dias</a>
+<header class="top">
+  <div class="w">
+    <a class="logo" href="#topo" aria-label="Bookink, início">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#17224D"/><path d="M16 6c4 5 7 8.6 7 12.4A7 7 0 0 1 9 18.4C9 14.6 12 11 16 6z" fill="#FFD84D"/></svg>
+      Bookink
+    </a>
+    <nav aria-label="Principal">
+      <a href="#recursos">Recursos</a>
+      <a href="#negocios">Para quem</a>
+      <a href="#faq">Dúvidas</a>
+      <a class="btn" href="#teste">Testar 14 dias</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+
+<section class="hero" aria-labelledby="h1">
+  <div class="w">
+    <div>
+      <h1 id="h1">Agenda cheia, equipe organizada e o caixa em dia.</h1>
+      <p class="lead">Bookink é o sistema de agendamento para quem atende com hora marcada. Agenda por profissional, sinal, comissão e avisos direto no celular, em vez de caderno e conversa solta no WhatsApp.</p>
+      <div class="acts">
+        <a class="btn" href="#teste">Testar 14 dias grátis</a>
+        <a class="btn alt" href="#recursos">Ver o que ele faz</a>
+      </div>
+      <p class="nota">Sem cartão de crédito. Seus dados ficam guardados depois do teste.</p>
+    </div>
+
+    <div class="demo" aria-labelledby="demo-t">
+      <div class="demo-h">
+        <p id="demo-t">Demonstração. Escolha o seu tipo de negócio e toque num horário livre.</p>
+        <div class="tabs" role="tablist" aria-label="Tipo de negócio">
+          <button role="tab" id="t-tatuagem" aria-selected="true" data-seg="tatuagem">Tatuagem</button>
+          <button role="tab" id="t-consultorio" aria-selected="false" data-seg="consultorio" tabindex="-1">Consultório</button>
+          <button role="tab" id="t-salao" aria-selected="false" data-seg="salao" tabindex="-1">Salão</button>
+        </div>
+      </div>
+      <div class="demo-b" role="tabpanel" id="painel" aria-labelledby="t-tatuagem">
+        <div class="demo-t"><strong id="d-prof">Rodrigo</strong><span id="d-dia">Agenda de hoje</span></div>
+        <ul class="slots" id="slots"></ul>
+        <div class="demo-f">
+          <span><b id="d-n">2</b> <span id="d-rot">agendamentos</span> hoje</span>
+          <button type="button" id="d-zera">Limpar demonstração</button>
+        </div>
+        <p class="vocab" id="vocab"></p>
+        <p class="sr" id="live" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="grid">
-<div class="c"><h3>Agenda por profissional</h3><p>Horários, bloqueios, lista de espera e pedidos de aprovação.</p></div>
-<div class="c"><h3>Pagamentos e comissões</h3><p>Sinal, formas de pagamento, divisão entre negócio e profissional.</p></div>
-<div class="c"><h3>Avisos no celular</h3><p>Notificação quando um horário é criado, remarcado ou removido.</p></div>
-<div class="c"><h3>Clientes e histórico</h3><p>Busca rápida, histórico de atendimentos e mensagens por WhatsApp.</p></div>
-<div class="c"><h3>Estoque e relatórios</h3><p>Controle de produtos e relatórios do mês em Excel ou PDF.</p></div>
-<div class="c"><h3>Seu nome e suas cores</h3><p>Logo, nome e vocabulário do seu tipo de negócio (paciente, consulta…).</p></div>
+<section class="rec" id="recursos" aria-labelledby="h-rec">
+  <div class="w">
+    <div class="sec-h">
+      <h2 id="h-rec">Tudo o que a recepção faz, num lugar só.</h2>
+      <p>Cada profissional entra com o próprio login e vê só o que precisa. O gestor enxerga o negócio inteiro.</p>
+    </div>
+    <ul class="linhas">
+      <li><h3>Agenda por profissional</h3><p>Horários, bloqueios de folga ou viagem e lista de espera. O sistema respeita o intervalo mínimo entre atendimentos.</p></li>
+      <li><h3>Link para o cliente pedir horário</h3><p>Você divulga um link, o cliente escolhe profissional, dia e horário livre. O pedido só entra na agenda quando você aprova.</p></li>
+      <li><h3>Sinal, pagamentos e comissão</h3><p>Registra o sinal, as formas de pagamento e divide o valor entre o negócio e cada profissional, inclusive quando dois atendem a mesma sessão.</p></li>
+      <li><h3>Avisos no celular</h3><p>O gestor recebe notificação quando um profissional marca um horário, e o profissional recebe quando um horário é remarcado ou removido.</p></li>
+      <li><h3>Clientes com histórico e etiquetas</h3><p>Busca rápida, histórico de atendimentos, fotos e etiquetas para filtrar a lista. O telefone repetido é conferido antes de duplicar o cadastro.</p></li>
+      <li><h3>Nada some sem deixar rastro</h3><p>Agendamentos recusados ou excluídos ficam guardados e podem ser restaurados. Mudanças sensíveis ficam registradas com quem fez e quando.</p></li>
+      <li><h3>Estoque e relatórios</h3><p>Controle de produtos com baixa automática e relatórios do período por profissional, em Excel ou PDF.</p></li>
+      <li><h3>Mensagens por WhatsApp</h3><p>Botões que abrem a conversa já com o texto pronto: confirmação, aniversário e cuidados depois do atendimento.</p></li>
+      <li><h3>Seu nome, seu logo, suas cores</h3><p>O sistema aparece com a cara do seu negócio e usa o vocabulário dele: paciente e consulta, cliente e agendamento.</p></li>
+    </ul>
+  </div>
 </section>
 
-<h2 id="teste">Peça seu teste grátis</h2>
-<p style="color:var(--mut)">Preparamos seu ambiente e enviamos o acesso pelo WhatsApp. Os 14 dias começam no primeiro acesso.</p>
-<form id="f">
-<label>Nome<input name="nome" required autocomplete="name"></label>
-<label>Nome do seu negócio<input name="negocio" required></label>
-<label>Tipo de negócio<select name="seg"><option>Estúdio de tatuagem / piercing</option><option>Consultório / clínica</option><option>Salão / barbearia / estética</option><option>Outro</option></select></label>
-<label>Seu WhatsApp (com DDD)<input name="tel" required inputmode="tel" autocomplete="tel"></label>
-<button type="submit">Pedir meu teste</button>
-<small>Ao enviar, abrimos o WhatsApp com a mensagem pronta. Usamos seus dados apenas para criar o teste e falar com você (LGPD). Após 14 dias o acesso é bloqueado; seus dados ficam guardados para você continuar se assinar.</small>
-</form>
+<section id="negocios" aria-labelledby="h-neg">
+  <div class="w">
+    <div class="sec-h">
+      <h2 id="h-neg">Fala a língua do seu negócio.</h2>
+      <p>O mesmo sistema troca nomes e recursos conforme o tipo de atendimento. Você escolhe na instalação e pode mudar depois.</p>
+    </div>
+    <div class="segs">
+      <div class="seg">
+        <h3>Estúdio de tatuagem e piercing</h3>
+        <dl><dt>Quem atende</dt><dd>Tatuador, piercing</dd><dt>Quem vem</dt><dd>Cliente</dd><dt>Hora marcada</dt><dd>Agendamento</dd></dl>
+        <p>Inclui pomada e aplicação no pagamento, cuidados pós-tatuagem e 2º tatuador na sessão.</p>
+      </div>
+      <div class="seg">
+        <h3>Consultório e clínica</h3>
+        <dl><dt>Quem atende</dt><dd>Profissional</dd><dt>Quem vem</dt><dd>Paciente</dd><dt>Hora marcada</dt><dd>Consulta</dd></dl>
+        <p>Valor por consulta, retorno e orientações enviadas ao paciente depois do atendimento.</p>
+      </div>
+      <div class="seg">
+        <h3>Salão, barbearia e estética</h3>
+        <dl><dt>Quem atende</dt><dd>Profissional, esteticista</dd><dt>Quem vem</dt><dd>Cliente</dd><dt>Hora marcada</dt><dd>Agendamento</dd></dl>
+        <p>Serviços como corte, barba e coloração, com comissão por profissional.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer>© Bookink · contato: <a href="https://wa.me/5511961977215" style="color:inherit">WhatsApp</a></footer>
-</div>
+<section style="padding-top:0" aria-labelledby="h-pas">
+  <div class="w">
+    <div class="sec-h"><h2 id="h-pas">Do pedido ao primeiro agendamento.</h2></div>
+    <ol class="passos">
+      <li><h3>Peça o teste</h3><p>Preencha o formulário abaixo. Abrimos o WhatsApp com a mensagem pronta.</p></li>
+      <li><h3>Receba o acesso</h3><p>Preparamos o ambiente do seu negócio e enviamos login e senha pelo WhatsApp.</p></li>
+      <li><h3>Cadastre a equipe</h3><p>Coloque profissionais, serviços e produtos. Os 14 dias começam no primeiro acesso.</p></li>
+      <li><h3>Decida com calma</h3><p>Gostou, você continua. Se não, o acesso é bloqueado e os dados ficam guardados.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="valor" aria-labelledby="h-val">
+  <div class="w">
+    <div>
+      <h2 id="h-val">O valor depende do tamanho da sua equipe.</h2>
+      <p>O plano é calculado pelo número de profissionais. Fale com a gente e receba o valor para o seu caso.</p>
+      <a class="btn mk" id="wa-valor" href="#">Consultar valor no WhatsApp</a>
+    </div>
+    <ul>
+      <li>Sem cartão para testar</li>
+      <li>Banco de dados só do seu negócio</li>
+      <li>Atendimento direto pelo WhatsApp</li>
+      <li>Seus dados continuam seus</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="h-faq">
+  <div class="w">
+    <div class="sec-h"><h2 id="h-faq">Dúvidas comuns</h2></div>
+    <div class="faq">
+      <details><summary>Preciso instalar alguma coisa?</summary><p>Não. O Bookink abre no navegador do celular ou do computador, com o endereço que enviamos. Os avisos chegam como notificação do navegador.</p></details>
+      <details><summary>Preciso de cartão para o teste?</summary><p>Não. O teste dura 14 dias a partir do primeiro acesso e não pede dados de pagamento.</p></details>
+      <details><summary>O que acontece com meus dados quando o teste acaba?</summary><p>O acesso é bloqueado, mas tudo o que você cadastrou continua guardado. Se assinar, você retoma de onde parou.</p></details>
+      <details><summary>Cada profissional vê a agenda dos outros?</summary><p>Cada um entra com o próprio login. O gestor e o administrador veem tudo, e você define o que cada cargo pode acessar.</p></details>
+      <details><summary>Meus clientes podem marcar sozinhos?</summary><p>Sim, pelo link de agendamento. O pedido fica pendente e só entra na agenda depois que o gestor ou o administrador aprova.</p></details>
+      <details><summary>Como ficam os dados dos clientes?</summary><p>Usamos os dados apenas para o funcionamento do sistema, de acordo com a LGPD. Cada negócio tem o seu próprio banco de dados.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="teste" id="teste" aria-labelledby="h-teste">
+  <div class="w">
+    <div class="sec-h">
+      <h2 id="h-teste">Peça seu teste de 14 dias.</h2>
+      <p>Preencha os quatro campos. Vamos abrir o WhatsApp com a mensagem pronta, e é só enviar. Preparamos o seu ambiente e mandamos o acesso por lá.</p>
+    </div>
+    <form id="f" novalidate>
+      <label>Seu nome<input name="nome" required autocomplete="name"></label>
+      <label>Nome do seu negócio<input name="negocio" required autocomplete="organization"></label>
+      <label>Tipo de negócio
+        <select name="seg">
+          <option>Estúdio de tatuagem / piercing</option>
+          <option>Consultório / clínica</option>
+          <option>Salão / barbearia / estética</option>
+          <option>Outro</option>
+        </select>
+      </label>
+      <label>Seu WhatsApp, com DDD<input name="tel" required inputmode="tel" autocomplete="tel" placeholder="11 99999-9999"></label>
+      <p id="erro" role="alert" style="color:#B3261E;font-weight:600;font-size:15px" hidden></p>
+      <button class="btn" type="submit">Pedir meu teste no WhatsApp</button>
+      <small>Usamos seus dados só para criar o teste e falar com você (LGPD). Depois dos 14 dias o acesso é bloqueado e seus dados ficam guardados.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="w">
+    <span>© Bookink</span>
+    <a href="#" id="wa-rodape">Falar no WhatsApp: (11) 96197-7215</a>
+  </div>
+</footer>
+
 <script>
-// TROQUE pelo seu número (somente dígitos, com 55 + DDD)
 var WHATSAPP = "5511961977215";
-document.getElementById("f").addEventListener("submit", function(e){
+function wa(t){return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(t)}
+document.getElementById("wa-valor").href = wa("Olá! Quero saber o valor do Bookink para o meu negócio.");
+document.getElementById("wa-rodape").href = wa("Olá! Quero saber mais sobre o Bookink.");
+
+/* ---------- demonstração da agenda ---------- */
+var SEG = {
+  tatuagem:{prof:"Rodrigo", rot:"agendamentos", cli:"Cliente", at:"Agendamento", novo:"Tatuagem pequena", voc:["Cliente","Agendamento","Tatuador"],
+    s:[["10:00","Marina","Tatuagem média"],["12:00"],["14:00","Caio","Piercing na orelha"],["16:00"],["18:00"]]},
+  consultorio:{prof:"Dra. Helena", rot:"consultas", cli:"Paciente", at:"Consulta", novo:"Consulta", voc:["Paciente","Consulta","Profissional"],
+    s:[["09:00","Teresa","Consulta"],["10:00"],["11:00","Paulo","Retorno"],["14:00"],["15:00"]]},
+  salao:{prof:"Bia", rot:"agendamentos", cli:"Cliente", at:"Agendamento", novo:"Corte e barba", voc:["Cliente","Agendamento","Profissional"],
+    s:[["09:30","Renata","Coloração"],["11:00"],["13:00","Diego","Corte e barba"],["15:00"],["16:30"]]}
+};
+var atual="tatuagem", reservas={};
+var $=function(i){return document.getElementById(i)};
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function desenha(){
+  var d=SEG[atual], ul=$("slots"), n=0, h="";
+  d.s.forEach(function(x,i){
+    if(x[1]){n++; h+='<li class="slot"><time>'+x[0]+'</time><span class="who">'+esc(x[1])+'<span class="what">'+esc(x[2])+'</span></span></li>'}
+    else if(reservas[atual+i]){n++; h+='<li class="slot novo"><time>'+x[0]+'</time><span class="who">Você<span class="what">'+esc(d.novo)+'</span></span><span class="stamp">Agendado</span></li>'}
+    else h+='<li><button type="button" class="slot livre" data-i="'+i+'"><time>'+x[0]+'</time><span class="who">Horário livre<span class="what">Toque para agendar</span></span></button></li>';
+  });
+  ul.innerHTML=h;
+  $("d-prof").textContent=d.prof; $("d-n").textContent=n; $("d-rot").textContent=d.rot;
+  $("vocab").innerHTML='Aqui quem vem é <b>'+d.voc[0]+'</b>, a hora marcada é <b>'+d.voc[1]+'</b> e quem atende é <b>'+d.voc[2]+'</b>.';
+}
+$("slots").addEventListener("click",function(e){
+  var b=e.target.closest("button.slot.livre"); if(!b) return;
+  var i=b.getAttribute("data-i"); reservas[atual+i]=1; desenha();
+  $("live").textContent=SEG[atual].at+" criado às "+SEG[atual].s[i][0]+".";
+  var f=$("slots").querySelector(".slot.novo .stamp");
+});
+$("d-zera").addEventListener("click",function(){reservas={};desenha();$("live").textContent="Demonstração limpa."});
+var tabs=[].slice.call(document.querySelectorAll(".tabs [role=tab]"));
+function troca(t,foco){
+  tabs.forEach(function(x){var on=x===t;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1});
+  atual=t.getAttribute("data-seg"); $("painel").setAttribute("aria-labelledby",t.id); desenha(); if(foco)t.focus();
+}
+tabs.forEach(function(t,i){
+  t.addEventListener("click",function(){troca(t)});
+  t.addEventListener("keydown",function(e){
+    var k=e.key, j=-1;
+    if(k==="ArrowRight")j=(i+1)%tabs.length; else if(k==="ArrowLeft")j=(i+tabs.length-1)%tabs.length;
+    if(j>=0){e.preventDefault();troca(tabs[j],true)}
+  });
+});
+desenha();
+
+/* ---------- pedido de teste ---------- */
+$("f").addEventListener("submit",function(e){
   e.preventDefault();
-  var d = new FormData(e.target);
-  var msg = "Olá! Quero testar o sistema por 14 dias.\n" +
-    "Nome: " + d.get("nome") + "\nNegócio: " + d.get("negocio") +
-    "\nTipo: " + d.get("seg") + "\nWhatsApp: " + d.get("tel");
-  window.location.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+  var d=new FormData(e.target), erro=$("erro"), tel=String(d.get("tel")||"").replace(/\D/g,"");
+  if(!String(d.get("nome")).trim()||!String(d.get("negocio")).trim()){erro.textContent="Preencha seu nome e o nome do seu negócio.";erro.hidden=false;return}
+  if(tel.length<10||tel.length>13){erro.textContent="Digite o WhatsApp com DDD, por exemplo 11 99999-9999.";erro.hidden=false;return}
+  erro.hidden=true;
+  var msg="Olá! Quero testar o Bookink por 14 dias.\nNome: "+d.get("nome")+"\nNegócio: "+d.get("negocio")+"\nTipo: "+d.get("seg")+"\nWhatsApp: "+d.get("tel");
+  window.location.href=wa(msg);
 });
 </script>
 </body>
