@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bookink — agenda e gestão para estúdios, clínicas e salões</title>
-<meta name="description" content="Agenda por profissional, sinal, comissão, estoque e avisos no celular. Teste o Bookink por 14 dias, sem cartão.">
+<meta name="description" content="Agenda por profissional, sinal, comissão, aprovações, estoque e relatórios no celular. Teste o Bookink por 14 dias, sem cartão.">
 <meta name="theme-color" content="#17224D">
 <meta property="og:title" content="Bookink — agenda e gestão para quem atende com hora marcada">
 <meta property="og:description" content="Estúdios de tatuagem, consultórios e salões: agenda, pagamentos, comissões e avisos no celular. 14 dias grátis.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="img/painel.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317224D'/%3E%3Cpath d='M16 6c4 5 7 8.6 7 12.4A7 7 0 0 1 9 18.4C9 14.600 12 11 16 6z' fill='%23FFD84D'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F2F4F7; --white:#FFFFFF; --ink:#17224D; --ink2:#2D45C9; --mark:#FFD84D;
+  --paper:#F2F4F7; --white:#FFFFFF; --ink:#17224D; --ink-d:#0F1838; --ink2:#2D45C9; --mark:#FFD84D;
   --txt:#1B2340; --mut:#4A5470; --line:#D5DAE4; --soft:#E7EBF3;
   --d:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --b:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -23,45 +24,104 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--txt);font:400 17px/1.6 var(--b);-webkit-font-smoothing:antialiased}
-.w{max-width:1120px;margin:0 auto;padding:0 20px}
+.w{max-width:1160px;margin:0 auto;padding:0 20px}
 a{color:inherit}
+img{display:block;max-width:100%;height:auto}
 :focus-visible{outline:3px solid var(--ink2);outline-offset:3px;border-radius:6px}
 h1,h2,h3{font-family:var(--d);margin:0;color:var(--ink);letter-spacing:-.02em}
-h1{font-weight:800;font-size:clamp(36px,6.4vw,64px);line-height:1.03}
-h2{font-weight:800;font-size:clamp(28px,4.2vw,40px);line-height:1.1}
-h3{font-weight:600;font-size:19px;line-height:1.25;letter-spacing:-.01em}
+h1{font-weight:800;font-size:clamp(36px,5.6vw,60px);line-height:1.04}
+h2{font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.1}
+h3{font-weight:600;font-size:20px;line-height:1.25;letter-spacing:-.01em}
 p{margin:0}
-.lead{font-size:clamp(18px,2.2vw,20px);color:var(--mut);max-width:34em}
+.lead{font-size:clamp(18px,2.1vw,20px);color:var(--mut);max-width:34em}
 
 /* botões */
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink2);color:#fff;border:0;border-radius:12px;padding:15px 24px;font:700 17px/1 var(--b);text-decoration:none;cursor:pointer;min-height:52px;transition:background .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink2);color:#fff;border:0;border-radius:12px;padding:15px 26px;font:700 17px/1 var(--b);text-decoration:none;cursor:pointer;min-height:54px;transition:background .15s,transform .15s}
 .btn:hover{background:#2238b0}
 .btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 .btn.alt:hover{background:var(--ink);color:#fff}
 .btn.mk{background:var(--mark);color:var(--ink)}
 .btn.mk:hover{background:#ffe27a}
-.btn svg{width:20px;height:20px;flex:none}
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
 
 /* topo */
-.top{position:sticky;top:0;z-index:20;background:rgba(242,244,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.top .w{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{display:flex;align-items:center;gap:10px;font:800 22px/1 var(--d);color:var(--ink);text-decoration:none;letter-spacing:-.03em}
-.logo svg{width:30px;height:30px}
+.top{position:sticky;top:0;z-index:30;background:rgba(242,244,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .w{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font:800 23px/1 var(--d);color:var(--ink);text-decoration:none;letter-spacing:-.03em}
+.logo svg{width:32px;height:32px}
 .top nav{display:flex;align-items:center;gap:26px}
 .top nav a:not(.btn){text-decoration:none;font-weight:500;color:var(--mut)}
 .top nav a:not(.btn):hover{color:var(--ink)}
 .top .btn{padding:11px 18px;min-height:44px;font-size:15px}
-@media(max-width:760px){.top nav a:not(.btn){display:none}}
+@media(max-width:820px){.top nav a:not(.btn){display:none}}
 
-/* hero */
-.hero{padding:56px 0 72px}
-.hero .w{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.hero h1{margin-bottom:20px}
+/* hero escuro */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:64px 0 0}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 420px at 85% 0%,rgba(45,69,201,.55),transparent 70%);pointer-events:none}
+.hero .w{position:relative;display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:center}
+.hero h1{color:#fff;margin-bottom:20px}
+.hero .lead{color:#C9D1EC}
 .hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.hero .nota{margin-top:16px;font-size:15px;color:var(--mut)}
-@media(max-width:900px){.hero{padding:36px 0 52px}.hero .w{grid-template-columns:1fr;gap:40px}}
+.hero .nota{margin-top:16px;font-size:15px;color:#AEB9DF}
+.vitrine{position:relative;padding-bottom:0;align-self:end}
+.bf{background:#fff;border-radius:14px 14px 0 0;overflow:hidden;box-shadow:0 30px 70px -20px rgba(5,9,30,.7)}
+.bf-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#E3E7F0;border-bottom:1px solid #CBD2E0}
+.bf-bar i{width:11px;height:11px;border-radius:50%;background:#B5BDD0;display:block}
+.bf-bar b{flex:1;height:20px;border-radius:10px;background:#F4F6FA;margin-left:10px}
+.vitrine .fone{position:absolute;right:-14px;bottom:-36px;width:27%;min-width:112px;z-index:2}
+.fone{border:7px solid #0B1230;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 24px 50px -14px rgba(5,9,30,.75)}
+@media(max-width:960px){.hero{padding-top:44px}.hero .w{grid-template-columns:1fr;gap:36px}.vitrine .fone{right:8px;bottom:-24px}}
 
-/* demo da agenda */
+/* faixa de fatos */
+.fatos{background:var(--white);border-bottom:1px solid var(--line)}
+.fatos .w{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.fato{padding:28px 20px 26px 0}
+.fato+.fato{padding-left:24px;border-left:1px solid var(--line)}
+.fato strong{display:block;font:800 23px/1.15 var(--d);color:var(--ink);letter-spacing:-.02em}
+.fato span{display:block;margin-top:4px;font-size:15px;color:var(--mut)}
+@media(max-width:820px){.fatos .w{grid-template-columns:1fr 1fr}.fato:nth-child(3){border-left:0;padding-left:0}.fato{border-top:1px solid var(--line)}.fato:nth-child(-n+2){border-top:0}}
+
+/* seções */
+section{padding:84px 0}
+.sec-h{max-width:38em;margin-bottom:40px}
+.sec-h p{margin-top:12px;color:var(--mut);font-size:18px}
+
+/* um dia no Bookink */
+.dia{background:var(--paper)}
+.dia ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
+.dia li{display:grid;grid-template-columns:104px 1fr;gap:18px;padding:24px 0;border-top:2px solid var(--ink)}
+.dia time{font:800 15px/1.3 var(--d);color:var(--ink2);padding-top:3px}
+.dia h3{margin-bottom:6px}
+.dia p{color:var(--mut)}
+@media(max-width:900px){.dia ol{grid-template-columns:1fr}}
+@media(max-width:480px){.dia li{grid-template-columns:1fr;gap:6px}}
+
+/* vitrine de telas */
+.tela{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tela.alt{background:var(--paper);border-top:0}
+.tela .w{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+.tela.inv .w{grid-template-columns:1.2fr .8fr}
+.tela.inv .txt{order:2}
+.tela h2{margin-bottom:14px}
+.tela .txt p{color:var(--mut);font-size:18px;max-width:30em}
+.tela ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.tela li{display:flex;gap:12px;align-items:flex-start}
+.tela li::before{content:"";flex:none;width:9px;height:9px;margin-top:10px;border-radius:50%;background:var(--ink2)}
+.sombra{border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,34,77,.45),0 0 0 1px var(--line);background:#fff}
+.sombra .bf-bar{background:#E7EBF3}
+.par{display:grid;gap:16px}
+.celulares{display:flex;gap:20px;justify-content:center;align-items:flex-start}
+.celulares .fone{width:min(46%,260px)}
+.celulares .fone:nth-child(2){margin-top:44px}
+@media(max-width:900px){.tela .w,.tela.inv .w{grid-template-columns:1fr;gap:32px}.tela.inv .txt{order:0}}
+.aviso-img{margin-top:14px;font-size:13.5px;color:var(--mut)}
+
+/* demonstração */
+.exp{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.exp .w{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.exp .txt p{color:var(--mut);font-size:18px;max-width:28em;margin-top:12px}
+@media(max-width:900px){.exp .w{grid-template-columns:1fr;gap:32px}}
 .demo{background:var(--white);border:2px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
 .demo-h{padding:14px 18px 0;background:var(--soft);border-bottom:2px solid var(--ink)}
 .demo-h p{font:600 13px/1.2 var(--b);color:var(--mut);margin-bottom:10px}
@@ -90,23 +150,16 @@ p{margin:0}
 .vocab{margin-top:12px;font-size:14px;color:var(--mut)}
 .vocab b{color:var(--ink)}
 
-/* seções */
-section{padding:72px 0}
-.sec-h{max-width:36em;margin-bottom:36px}
-.sec-h p{margin-top:12px;color:var(--mut);font-size:18px}
-
-/* recursos: linhas com filetes */
-.rec{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.rec .w{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
-.rec .sec-h{position:sticky;top:96px;align-self:start}
-.linhas{list-style:none;margin:0;padding:0}
-.linhas li{display:grid;grid-template-columns:1fr;gap:4px;padding:20px 0;border-top:1px solid var(--line)}
-.linhas li:first-child{border-top:0;padding-top:0}
-.linhas p{color:var(--mut);max-width:34em}
-@media(max-width:900px){.rec .w{grid-template-columns:1fr;gap:28px}.rec .sec-h{position:static}}
+/* todos os recursos */
+.rec{background:var(--white)}
+.rec .grade{display:grid;grid-template-columns:repeat(3,1fr);gap:0 48px}
+.rec .it{padding:22px 0;border-top:1px solid var(--line)}
+.rec .it p{color:var(--mut);margin-top:4px;font-size:16px}
+@media(max-width:900px){.rec .grade{grid-template-columns:1fr 1fr;gap:0 32px}}
+@media(max-width:560px){.rec .grade{grid-template-columns:1fr}}
 
 /* segmentos */
-.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);border-radius:20px;background:var(--white);overflow:hidden}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink);border-radius:20px;background:var(--white);overflow:hidden}
 .seg{padding:26px 26px 28px}
 .seg+.seg{border-left:2px solid var(--ink)}
 .seg h3{margin-bottom:14px}
@@ -130,7 +183,7 @@ section{padding:72px 0}
 .valor .w{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
 .valor h2{color:#fff}
 .valor p{color:#C9D1EC;margin-top:14px;max-width:32em}
-.valor ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;color:#fff}
+.valor ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;color:#fff}
 .valor li{display:flex;gap:10px;align-items:flex-start}
 .valor li::before{content:"";flex:none;width:10px;height:10px;margin-top:9px;border-radius:50%;background:var(--mark)}
 .valor .btn{margin-top:26px}
@@ -155,12 +208,12 @@ label{display:grid;gap:6px;font-weight:600;font-size:15px;color:var(--ink)}
 input,select{font:400 17px var(--b);color:var(--txt);background:var(--white);border:1.5px solid #9AA5C2;border-radius:10px;padding:13px 14px;min-height:50px;width:100%}
 input:focus,select:focus{outline:3px solid var(--ink2);outline-offset:1px;border-color:var(--ink2)}
 form small{color:var(--mut);font-size:13.5px;line-height:1.5}
-form .btn{justify-content:center;width:100%}
+form .btn{width:100%}
 @media(max-width:900px){.teste .w{grid-template-columns:1fr;gap:32px}}
 
-footer{padding:36px 0 44px;color:var(--mut);font-size:15px}
+footer{background:var(--ink-d);color:#AEB9DF;padding:36px 0 44px;font-size:15px}
 footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-
+footer a{color:#fff}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -174,7 +227,8 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;ali
       Bookink
     </a>
     <nav aria-label="Principal">
-      <a href="#recursos">Recursos</a>
+      <a href="#dia">Como funciona</a>
+      <a href="#telas">O sistema</a>
       <a href="#negocios">Para quem</a>
       <a href="#faq">Dúvidas</a>
       <a class="btn" href="#teste">Testar 14 dias</a>
@@ -187,18 +241,141 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;ali
 <section class="hero" aria-labelledby="h1">
   <div class="w">
     <div>
-      <h1 id="h1">Agenda cheia, equipe organizada e o caixa em dia.</h1>
-      <p class="lead">Bookink é o sistema de agendamento para quem atende com hora marcada. Agenda por profissional, sinal, comissão e avisos direto no celular, em vez de caderno e conversa solta no WhatsApp.</p>
+      <h1 id="h1">Sua agenda, sua equipe e seu caixa num só sistema.</h1>
+      <p class="lead">Bookink é o sistema de gestão para quem atende com hora marcada: estúdios de tatuagem, consultórios e salões. Agenda por profissional, sinal, comissão, aprovações e relatórios, no celular e no computador.</p>
       <div class="acts">
-        <a class="btn" href="#teste">Testar 14 dias grátis</a>
-        <a class="btn alt" href="#recursos">Ver o que ele faz</a>
+        <a class="btn mk" href="#teste">Testar 14 dias grátis</a>
+        <a class="btn ghost" href="#telas">Ver o sistema por dentro</a>
       </div>
       <p class="nota">Sem cartão de crédito. Seus dados ficam guardados depois do teste.</p>
     </div>
+    <div class="vitrine">
+      <div class="bf">
+        <div class="bf-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+        <img src="img/painel.webp" width="1400" height="570" alt="Painel do gestor do Bookink com faturamento, agendamentos do dia e da semana, gastos e saldo.">
+      </div>
+      <div class="fone"><img src="img/celular-painel.webp" width="560" height="1212" alt="O mesmo painel aberto no celular." loading="eager"></div>
+    </div>
+  </div>
+</section>
 
+<div class="fatos">
+  <div class="w">
+    <div class="fato"><strong>14 dias grátis</strong><span>Sem cartão de crédito</span></div>
+    <div class="fato"><strong>3 tipos de negócio</strong><span>Tatuagem, consultório e salão</span></div>
+    <div class="fato"><strong>Celular e computador</strong><span>Abre no navegador, sem instalar</span></div>
+    <div class="fato"><strong>Banco só seu</strong><span>Cada negócio com os próprios dados</span></div>
+  </div>
+</div>
+
+<section class="dia" id="dia" aria-labelledby="h-dia">
+  <div class="w">
+    <div class="sec-h">
+      <h2 id="h-dia">Um dia de trabalho com o Bookink.</h2>
+      <p>Do primeiro pedido ao fechamento do mês, o que hoje está espalhado entre caderno, planilha e conversas fica num lugar só.</p>
+    </div>
+    <ol>
+      <li><time>De manhã</time><div><h3>O cliente pede o horário sozinho</h3><p>Você divulga um link. O cliente escolhe profissional, dia e horário livre, e o pedido espera a sua aprovação antes de entrar na agenda.</p></div></li>
+      <li><time>Na recepção</time><div><h3>O profissional marca, o gestor fica sabendo</h3><p>O horário entra na agenda na hora e o gestor recebe um aviso para conferir. Se o telefone já existir, o sistema pergunta se é a mesma pessoa.</p></div></li>
+      <li><time>No atendimento</time><div><h3>Sinal e pagamento no lugar certo</h3><p>O sinal aparece no card do agendamento. No pagamento, o valor se divide entre o negócio e o profissional, também quando dois atendem a mesma sessão.</p></div></li>
+      <li><time>Quando algo muda</time><div><h3>Remarcou? Todo mundo é avisado</h3><p>Quem mudou, removeu ou remarcou um horário dispara uma notificação no celular dos profissionais envolvidos.</p></div></li>
+      <li><time>Se foi sem querer</time><div><h3>Recusou por engano? Restaure</h3><p>Todo agendamento recusado ou excluído fica guardado numa lista, com quem removeu e quando. Um toque devolve o horário à agenda.</p></div></li>
+      <li><time>No fim do mês</time><div><h3>Relatório por profissional</h3><p>Previsto e recebido, parte do negócio e comissão de cada um, para baixar em Excel ou PDF. Gastos e estoque entram na conta.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<span id="telas"></span>
+
+<section class="tela" aria-labelledby="h-t1">
+  <div class="w">
+    <div class="txt">
+      <h2 id="h-t1">A agenda de cada profissional, num olhar.</h2>
+      <p>Veja o dia, a semana, o mês ou o calendário. Cada card mostra horário, cliente, serviço, sinal e total.</p>
+      <ul>
+        <li>Agenda separada por profissional, com bloqueio de folga e viagem</li>
+        <li>Lista de espera para quem não achou horário</li>
+        <li>Etiquetas nos clientes e botão de WhatsApp com mensagem pronta</li>
+      </ul>
+    </div>
+    <div class="sombra">
+      <div class="bf-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+      <img src="img/agenda.webp" width="1400" height="775" alt="Agenda do dia com cards de agendamento, sinal já pago e total, separados por profissional." loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="tela alt inv" aria-labelledby="h-t2">
+  <div class="w">
+    <div class="par">
+      <div class="sombra">
+        <div class="bf-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+        <img src="img/solicitacoes.webp" width="1400" height="323" alt="Tela de solicitações com um agendamento criado pelo tatuador e os botões Aprovar e Recusar." loading="lazy">
+      </div>
+      <div class="sombra">
+        <div class="bf-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+        <img src="img/recusados.webp" width="1400" height="439" alt="Lista de agendamentos recusados com o botão Restaurar." loading="lazy">
+      </div>
+    </div>
+    <div class="txt">
+      <h2 id="h-t2">Você no controle, sem travar a equipe.</h2>
+      <p>Os profissionais agendam com autonomia. O gestor acompanha tudo e decide quando precisa.</p>
+      <ul>
+        <li>Pedidos do link público esperam a sua aprovação</li>
+        <li>Agendamento do profissional entra direto e gera um aviso</li>
+        <li>Nada se perde: o que foi recusado pode ser restaurado</li>
+        <li>Cada cargo vê só o que você liberar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tela" aria-labelledby="h-t3">
+  <div class="w">
+    <div class="txt">
+      <h2 id="h-t3">O dinheiro do mês, por profissional.</h2>
+      <p>Relatórios de previsto e recebido, com a parte do negócio e a comissão de cada pessoa, prontos para exportar.</p>
+      <ul>
+        <li>Filtros por período, profissional e forma de pagamento</li>
+        <li>Exporta em Excel e PDF</li>
+        <li>Controle de estoque com baixa e gastos lançados</li>
+      </ul>
+    </div>
+    <div class="sombra">
+      <div class="bf-bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+      <img src="img/relatorio.webp" width="1400" height="693" alt="Relatório do mês com valores previstos e recebidos, parte do estúdio e comissão por funcionário." loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="tela alt inv" aria-labelledby="h-t4">
+  <div class="w">
+    <div class="celulares">
+      <div class="fone"><img src="img/celular-painel.webp" width="560" height="1212" alt="Painel do Bookink no celular." loading="lazy"></div>
+      <div class="fone"><img src="img/celular-menu.webp" width="560" height="1212" alt="Menu do Bookink no celular com todas as seções." loading="lazy"></div>
+    </div>
+    <div class="txt">
+      <h2 id="h-t4">No bolso de quem toca o negócio.</h2>
+      <p>O Bookink se ajusta à tela do celular. O gestor confere o dia, aprova pedidos e recebe avisos de onde estiver.</p>
+      <ul>
+        <li>Notificações no celular de novos horários e remarcações</li>
+        <li>Mesmo login no celular e no computador</li>
+        <li>Seu nome, seu logo e suas cores na tela de entrada</li>
+      </ul>
+      <p class="aviso-img">As imagens mostram o sistema com dados fictícios.</p>
+    </div>
+  </div>
+</section>
+
+<section class="exp" aria-labelledby="h-exp">
+  <div class="w">
+    <div class="txt">
+      <h2 id="h-exp">Experimente a agenda agora.</h2>
+      <p>Escolha o seu tipo de negócio e toque num horário livre. Repare como os nomes mudam: paciente, consulta, cliente, agendamento.</p>
+    </div>
     <div class="demo" aria-labelledby="demo-t">
       <div class="demo-h">
-        <p id="demo-t">Demonstração. Escolha o seu tipo de negócio e toque num horário livre.</p>
+        <p id="demo-t">Demonstração. Escolha o tipo de negócio e toque num horário livre.</p>
         <div class="tabs" role="tablist" aria-label="Tipo de negócio">
           <button role="tab" id="t-tatuagem" aria-selected="true" data-seg="tatuagem">Tatuagem</button>
           <button role="tab" id="t-consultorio" aria-selected="false" data-seg="consultorio" tabindex="-1">Consultório</button>
@@ -206,7 +383,7 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;ali
         </div>
       </div>
       <div class="demo-b" role="tabpanel" id="painel" aria-labelledby="t-tatuagem">
-        <div class="demo-t"><strong id="d-prof">Rodrigo</strong><span id="d-dia">Agenda de hoje</span></div>
+        <div class="demo-t"><strong id="d-prof">Rodrigo</strong><span>Agenda de hoje</span></div>
         <ul class="slots" id="slots"></ul>
         <div class="demo-f">
           <span><b id="d-n">2</b> <span id="d-rot">agendamentos</span> hoje</span>
@@ -222,20 +399,23 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;ali
 <section class="rec" id="recursos" aria-labelledby="h-rec">
   <div class="w">
     <div class="sec-h">
-      <h2 id="h-rec">Tudo o que a recepção faz, num lugar só.</h2>
-      <p>Cada profissional entra com o próprio login e vê só o que precisa. O gestor enxerga o negócio inteiro.</p>
+      <h2 id="h-rec">E muito mais no dia a dia.</h2>
+      <p>Tudo o que a recepção e o gestor precisam, sem planilha paralela.</p>
     </div>
-    <ul class="linhas">
-      <li><h3>Agenda por profissional</h3><p>Horários, bloqueios de folga ou viagem e lista de espera. O sistema respeita o intervalo mínimo entre atendimentos.</p></li>
-      <li><h3>Link para o cliente pedir horário</h3><p>Você divulga um link, o cliente escolhe profissional, dia e horário livre. O pedido só entra na agenda quando você aprova.</p></li>
-      <li><h3>Sinal, pagamentos e comissão</h3><p>Registra o sinal, as formas de pagamento e divide o valor entre o negócio e cada profissional, inclusive quando dois atendem a mesma sessão.</p></li>
-      <li><h3>Avisos no celular</h3><p>O gestor recebe notificação quando um profissional marca um horário, e o profissional recebe quando um horário é remarcado ou removido.</p></li>
-      <li><h3>Clientes com histórico e etiquetas</h3><p>Busca rápida, histórico de atendimentos, fotos e etiquetas para filtrar a lista. O telefone repetido é conferido antes de duplicar o cadastro.</p></li>
-      <li><h3>Nada some sem deixar rastro</h3><p>Agendamentos recusados ou excluídos ficam guardados e podem ser restaurados. Mudanças sensíveis ficam registradas com quem fez e quando.</p></li>
-      <li><h3>Estoque e relatórios</h3><p>Controle de produtos com baixa automática e relatórios do período por profissional, em Excel ou PDF.</p></li>
-      <li><h3>Mensagens por WhatsApp</h3><p>Botões que abrem a conversa já com o texto pronto: confirmação, aniversário e cuidados depois do atendimento.</p></li>
-      <li><h3>Seu nome, seu logo, suas cores</h3><p>O sistema aparece com a cara do seu negócio e usa o vocabulário dele: paciente e consulta, cliente e agendamento.</p></li>
-    </ul>
+    <div class="grade">
+      <div class="it"><h3>Intervalo entre atendimentos</h3><p>O sistema respeita o tempo mínimo entre um cliente e outro.</p></div>
+      <div class="it"><h3>Lista de espera</h3><p>Guarda quem quer um horário e mantém o sinal já pago.</p></div>
+      <div class="it"><h3>Bloqueios de agenda</h3><p>Folga, viagem ou doença: o profissional não recebe horário no período.</p></div>
+      <div class="it"><h3>Clientes e histórico</h3><p>Busca rápida, histórico de atendimentos, fotos e etiquetas para filtrar.</p></div>
+      <div class="it"><h3>Telefone repetido</h3><p>Conferido antes de duplicar o cadastro. Marido, esposa, mãe e filho cabem no mesmo número.</p></div>
+      <div class="it"><h3>Orçamentos</h3><p>Pedidos de orçamento organizados, com mensagem pronta para responder.</p></div>
+      <div class="it"><h3>Estoque</h3><p>Produtos com baixa automática e movimentação do mês.</p></div>
+      <div class="it"><h3>Gastos e saldo</h3><p>Lance as despesas e veja o saldo do período no painel.</p></div>
+      <div class="it"><h3>Mensagens de WhatsApp</h3><p>Confirmação, aniversário e cuidados depois do atendimento, com um toque.</p></div>
+      <div class="it"><h3>Histórico de alterações</h3><p>Mudanças sensíveis ficam registradas com quem fez e quando.</p></div>
+      <div class="it"><h3>Permissões por cargo</h3><p>Gestor, administrador e profissionais veem só o que for liberado.</p></div>
+      <div class="it"><h3>Sua marca</h3><p>Nome, logo, cores e tema claro ou escuro do seu negócio.</p></div>
+    </div>
   </div>
 </section>
 
@@ -349,11 +529,11 @@ document.getElementById("wa-rodape").href = wa("Olá! Quero saber mais sobre o B
 
 /* ---------- demonstração da agenda ---------- */
 var SEG = {
-  tatuagem:{prof:"Rodrigo", rot:"agendamentos", cli:"Cliente", at:"Agendamento", novo:"Tatuagem pequena", voc:["Cliente","Agendamento","Tatuador"],
+  tatuagem:{prof:"Rodrigo", rot:"agendamentos", at:"Agendamento", novo:"Tatuagem pequena", voc:["Cliente","Agendamento","Tatuador"],
     s:[["10:00","Marina","Tatuagem média"],["12:00"],["14:00","Caio","Piercing na orelha"],["16:00"],["18:00"]]},
-  consultorio:{prof:"Dra. Helena", rot:"consultas", cli:"Paciente", at:"Consulta", novo:"Consulta", voc:["Paciente","Consulta","Profissional"],
+  consultorio:{prof:"Dra. Helena", rot:"consultas", at:"Consulta", novo:"Consulta", voc:["Paciente","Consulta","Profissional"],
     s:[["09:00","Teresa","Consulta"],["10:00"],["11:00","Paulo","Retorno"],["14:00"],["15:00"]]},
-  salao:{prof:"Bia", rot:"agendamentos", cli:"Cliente", at:"Agendamento", novo:"Corte e barba", voc:["Cliente","Agendamento","Profissional"],
+  salao:{prof:"Bia", rot:"agendamentos", at:"Agendamento", novo:"Corte e barba", voc:["Cliente","Agendamento","Profissional"],
     s:[["09:30","Renata","Coloração"],["11:00"],["13:00","Diego","Corte e barba"],["15:00"],["16:30"]]}
 };
 var atual="tatuagem", reservas={};
@@ -374,7 +554,6 @@ $("slots").addEventListener("click",function(e){
   var b=e.target.closest("button.slot.livre"); if(!b) return;
   var i=b.getAttribute("data-i"); reservas[atual+i]=1; desenha();
   $("live").textContent=SEG[atual].at+" criado às "+SEG[atual].s[i][0]+".";
-  var f=$("slots").querySelector(".slot.novo .stamp");
 });
 $("d-zera").addEventListener("click",function(){reservas={};desenha();$("live").textContent="Demonstração limpa."});
 var tabs=[].slice.call(document.querySelectorAll(".tabs [role=tab]"));
